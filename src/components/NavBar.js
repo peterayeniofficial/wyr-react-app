@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Container, Menu } from "semantic-ui-react";
+import { Container, Menu, Image } from "semantic-ui-react";
 
 class NavBar extends Component {
   render() {
@@ -20,6 +20,18 @@ class NavBar extends Component {
             <Menu.Item as={Link} to="/leader-board">
               Leader Board
             </Menu.Item>
+            <Menu.Menu position="right">
+              <Menu.Item>
+                <Image
+                  avatar
+                  size="mini"
+                  src="https://randomuser.me/api/portraits/women/62.jpg"
+                />
+                Hello, Peter
+              </Menu.Item>
+
+              <Menu.Item name="Logout" />
+            </Menu.Menu>
           </Container>
         </Menu>
       </div>
