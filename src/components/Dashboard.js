@@ -3,6 +3,7 @@ import { Tab } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
 import Question from "./Question";
+import { Grid } from "semantic-ui-react";
 
 class Dashboard extends Component {
   render() {
@@ -14,11 +15,15 @@ class Dashboard extends Component {
         render: () => (
           <Tab.Pane attached={false}>
             <Row>
-              {unansweredQuestions.map(qid => (
-                <Col key={qid}>
-                  <Question id={qid} />
-                </Col>
-              ))}
+              <Grid textAlign="center" verticalAlign="middle">
+                <Grid.Column style={{ maxWidth: 450 }}>
+                  {unansweredQuestions.map(qid => (
+                    <Col key={qid}>
+                      <Question id={qid} />
+                    </Col>
+                  ))}
+                </Grid.Column>
+              </Grid>
             </Row>
           </Tab.Pane>
         )
@@ -28,11 +33,16 @@ class Dashboard extends Component {
         render: () => (
           <Tab.Pane attached={false}>
             <Row>
-              {answeredQuestions.map(qid => (
-                <Col key={qid}>
-                  <Question id={qid} />
-                </Col>
-              ))}
+              <Grid textAlign="center" verticalAlign="middle">
+                <Grid.Column style={{ maxWidth: 450 }}>
+                  {answeredQuestions.map(qid => (
+                    <Col key={qid}>
+                      <Question id={qid} />
+                      <br />
+                    </Col>
+                  ))}
+                </Grid.Column>
+              </Grid>
             </Row>
           </Tab.Pane>
         )
@@ -48,8 +58,11 @@ class Dashboard extends Component {
         height: 40px;
       }
     `}</style>
-
-        <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+        <Grid textAlign="center" verticalAlign="middle">
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }
@@ -66,7 +79,10 @@ function mapStateToProps({ questions, users, authedUser }) {
   return {
     authedUser,
     answeredQuestions,
-    unansweredQuestions
+    unansweredQuestions,
+    questions,
+    users,
+    user
   };
 }
 

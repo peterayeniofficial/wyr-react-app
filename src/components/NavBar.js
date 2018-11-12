@@ -13,7 +13,7 @@ class NavBar extends Component {
     dispatch(unSetAuthUser());
   };
   render() {
-    const { authedUser } = this.props;
+    const { authedUser, imgUrl } = this.props;
     return (
       <div>
         <Menu fixed="top" inverted>
@@ -65,7 +65,7 @@ class NavBar extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
   return {
     authedUser
   };

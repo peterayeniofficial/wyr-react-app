@@ -4,7 +4,7 @@ class NotFound extends Component {
   render() {
     return (
       <div>
-        <p>Hello World</p>
+        <p style={{ marginTop: 60 }}>Hello World</p>
       </div>
     );
   }

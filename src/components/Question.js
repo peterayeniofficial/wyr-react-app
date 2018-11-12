@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { formatQuestion } from "../utils/helpers";
+import { Image } from "semantic-ui-react";
 import {
   Card,
   CardBody,
@@ -16,13 +18,24 @@ const Question = props => {
     props.history.push(`/questions/${id}`);
   };
   const { question } = props;
+  const {
+    id,
+    name,
+    avatar,
+    timestamp,
+    optionOneText,
+    optionTwoText
+  } = question;
   return (
     <Card>
-      <CardHeader>Question</CardHeader>
+      <CardHeader>
+        <Image avatar size="mini" src={avatar} />
+        {name} Asks:
+      </CardHeader>
       <CardBody>
         <CardTitle>Would You Rather</CardTitle>
         <CardText>
-          {question.optionOne.text} or {question.optionTwo.text}
+          {optionOneText} or {optionTwoText}
         </CardText>
         <Button
           outline
@@ -37,9 +50,13 @@ const Question = props => {
   );
 };
 
-function mapStateToProps({ questions }, { id }) {
+function mapStateToProps({ questions, users, authedUser }, { id }) {
+  const question = questions[id];
   return {
-    question: questions[id]
+    authedUser,
+    question: question
+      ? formatQuestion(question, users[question.author], authedUser)
+      : null
   };
 }
 
