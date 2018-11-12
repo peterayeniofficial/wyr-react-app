@@ -1,21 +1,73 @@
 import React, { Component } from "react";
 import { Tab } from "semantic-ui-react";
-
-const panes = [
-  {
-    menuItem: "Tab 1",
-    render: () => <Tab.Pane attached={false}>Tab 1 Content</Tab.Pane>
-  },
-  {
-    menuItem: "Tab 2",
-    render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane>
-  }
-];
+import { connect } from "react-redux";
+import { Row, Col } from "reactstrap";
+import Question from "./Question";
 
 class Dashboard extends Component {
   render() {
-    return <Tab menu={{ secondary: true, pointing: true }} panes={panes} />;
+    const { unansweredQuestions, answeredQuestions } = this.props;
+
+    const panes = [
+      {
+        menuItem: "Unanswered",
+        render: () => (
+          <Tab.Pane attached={false}>
+            <Row>
+              {unansweredQuestions.map(qid => (
+                <Col key={qid}>
+                  <Question id={qid} />
+                </Col>
+              ))}
+            </Row>
+          </Tab.Pane>
+        )
+      },
+      {
+        menuItem: "Answered",
+        render: () => (
+          <Tab.Pane attached={false}>
+            <Row>
+              {answeredQuestions.map(qid => (
+                <Col key={qid}>
+                  <Question id={qid} />
+                </Col>
+              ))}
+            </Row>
+          </Tab.Pane>
+        )
+      }
+    ];
+
+    return (
+      <div>
+        <style>{`
+      body > div,
+      body > div > div,
+      body > div > div > div.login-form {
+        height: 40px;
+      }
+    `}</style>
+
+        <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+      </div>
+    );
   }
 }
 
-export default Dashboard;
+function mapStateToProps({ questions, users, authedUser }) {
+  const user = users[authedUser];
+  const answeredQuestions = Object.keys(questions).sort(
+    (a, b) => questions[b].timestamp - questions[a].timestamp
+  );
+  const unansweredQuestions = Object.keys(questions)
+    .filter(id => !answeredQuestions.includes(id))
+    .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
+  return {
+    authedUser,
+    answeredQuestions,
+    unansweredQuestions
+  };
+}
+
+export default connect(mapStateToProps)(Dashboard);

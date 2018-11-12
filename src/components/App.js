@@ -10,6 +10,7 @@ import Dashboard from "./Dashboard";
 import LeaderBoard from "./LeaderBoard";
 import AddQuestion from "./AddQuestion";
 import SignIn from "./SignIn";
+import NotFound from "./NotFound";
 
 class App extends Component {
   componentDidMount() {
@@ -21,19 +22,19 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar />
+          <NavBar />
           <Container>
-            <NavBar />
-
             <Switch>
               {notAuthenticated ? (
-                <Route path="/" exact Component={SignIn} />
+                <Route path="/" exact component={SignIn} />
               ) : (
                 <Fragment>
-                  <Route path="/" exact Component={Dashboard} />
-                  <Route path="/add-question" Component={AddQuestion} />
-                  <Route path="/leader-board" Component={LeaderBoard} />
+                  <Route path="/" exact component={Dashboard} />
+                  <Route path="/add-question" exact component={AddQuestion} />
+                  <Route path="/leader-board" exact component={LeaderBoard} />
                 </Fragment>
               )}
+              <Route component={NotFound} />
             </Switch>
           </Container>
         </Fragment>
