@@ -32,9 +32,6 @@ class NavBar extends Component {
                 <Menu.Item as={Link} to="/leader-board">
                   Leader Board
                 </Menu.Item>
-              </Fragment>
-            ) : (
-              <Fragment>
                 <Menu.Menu position="right">
                   <Menu.Item>
                     <Image
@@ -47,6 +44,18 @@ class NavBar extends Component {
 
                   <Menu.Item name="Logout" onClick={this.logout} />
                 </Menu.Menu>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Menu.Item as={Link} to="/">
+                  Home
+                </Menu.Item>
+                <Menu.Item as={Link} to="/add-question">
+                  New Question
+                </Menu.Item>
+                <Menu.Item as={Link} to="/leader-board">
+                  Leader Board
+                </Menu.Item>
               </Fragment>
             )}
           </Container>
