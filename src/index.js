@@ -1,15 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
+import { composeWithDevTools } from "redux-devtools-extension";
 import "./index.css";
 import "semantic-ui-css/semantic.min.css";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 
-const store = createStore(reducer, middleware);
+const store = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
 ReactDOM.render(
   <Provider store={store}>
