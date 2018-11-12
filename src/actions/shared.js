@@ -6,7 +6,7 @@ import { hideLoading, showLoading } from "react-redux-loading";
 export function handleInitialData() {
   return dispatch => {
     dispatch(showLoading());
-    return getInitialData.then(({ users, questions }) => {
+    return getInitialData().then(({ users, questions }) => {
       dispatch(receiveUsers(users));
       dispatch(getQuestion(questions));
       dispatch(hideLoading());
