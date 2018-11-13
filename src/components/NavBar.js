@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { unSetAuthUser } from "../actions/authUser";
 import { Link } from "react-router-dom";
-import { Container, Menu, Image } from "semantic-ui-react";
+import { Container, Menu } from "semantic-ui-react";
 
 class NavBar extends Component {
   logout = e => {
@@ -13,7 +13,7 @@ class NavBar extends Component {
     dispatch(unSetAuthUser());
   };
   render() {
-    const { authedUser, imgUrl } = this.props;
+    const { authedUser } = this.props;
     return (
       <div>
         <Menu fixed="top" inverted>
@@ -33,14 +33,7 @@ class NavBar extends Component {
                   Leader Board
                 </Menu.Item>
                 <Menu.Menu position="right">
-                  <Menu.Item>
-                    <Image
-                      avatar
-                      size="mini"
-                      src="https://randomuser.me/api/portraits/women/62.jpg"
-                    />
-                    Hello, Peter
-                  </Menu.Item>
+                  <Menu.Item>Welcome, Back</Menu.Item>
 
                   <Menu.Item name="Logout" onClick={this.logout} />
                 </Menu.Menu>
@@ -64,8 +57,7 @@ class NavBar extends Component {
     );
   }
 }
-
-function mapStateToProps({ authedUser, users }) {
+function mapStateToProps({ authedUser }) {
   return {
     authedUser
   };
