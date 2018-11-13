@@ -11,6 +11,7 @@ import LeaderBoard from "./LeaderBoard";
 import AddQuestion from "./AddQuestion";
 import SignIn from "./SignIn";
 import NotFound from "./NotFound";
+import PollDetails from "./PollDetails";
 
 class App extends Component {
   componentDidMount() {
@@ -31,6 +32,7 @@ class App extends Component {
                 <Fragment>
                   <Route path="/" exact component={Dashboard} />
                   <Route path="/add-question" exact component={AddQuestion} />
+                  <Route path="/questions/:id" component={PollDetails} />
                   <Route path="/leader-board" exact component={LeaderBoard} />
                 </Fragment>
               )}

@@ -14,6 +14,13 @@ export function formatQuestion(question, author, authedUser) {
     timestamp,
     avatar: avatarURL,
     optionOneText: optionOne.text,
-    optionTwoText: optionTwo.text
+    optionTwoText: optionTwo.text,
+    optionOneIsAnswered: optionOne.votes.includes(authedUser),
+    optionTwoIsAnswered: optionTwo.votes.includes(authedUser),
+    isAnswered:
+      optionOne.votes.includes(authedUser) ||
+      optionTwo.votes.includes(authedUser),
+    optionOneVotes: optionOne.votes.length,
+    optionTwoVotes: optionTwo.votes.length
   };
 }

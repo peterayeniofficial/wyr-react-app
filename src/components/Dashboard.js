@@ -73,16 +73,12 @@ function mapStateToProps({ questions, users, authedUser }) {
   const answeredQuestions = Object.keys(questions).sort(
     (a, b) => questions[b].timestamp - questions[a].timestamp
   );
-  const unansweredQuestions = Object.keys(questions)
-    .filter(id => !answeredQuestions.includes(id))
-    .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
   return {
     authedUser,
     answeredQuestions,
-    unansweredQuestions,
-    questions,
-    users,
-    user
+    unansweredQuestions: Object.keys(questions)
+      .filter(qid => !answeredQuestions.includes(qid))
+      .sort((a, b) => questions[b].timestamp - questions[a].timestamp)
   };
 }
 
