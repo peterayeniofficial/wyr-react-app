@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { unSetAuthUser } from "../actions/authUser";
 import { Link } from "react-router-dom";
 import { Container, Menu } from "semantic-ui-react";
+import User from "./User";
 
 class NavBar extends Component {
   logout = e => {
@@ -13,7 +14,7 @@ class NavBar extends Component {
     dispatch(unSetAuthUser());
   };
   render() {
-    const { authedUser } = this.props;
+    const { authedUser, users } = this.props;
     return (
       <div>
         <Menu fixed="top" inverted>
@@ -26,14 +27,14 @@ class NavBar extends Component {
                 <Menu.Item as={Link} to="/">
                   Home
                 </Menu.Item>
-                <Menu.Item as={Link} to="/add-question">
+                <Menu.Item as={Link} to="/add">
                   New Question
                 </Menu.Item>
-                <Menu.Item as={Link} to="/leader-board">
+                <Menu.Item as={Link} to="/leader">
                   Leader Board
                 </Menu.Item>
                 <Menu.Menu position="right">
-                  <Menu.Item>Welcome, Back</Menu.Item>
+                  <Menu.Item>Welcome</Menu.Item>
 
                   <Menu.Item name="Logout" onClick={this.logout} />
                 </Menu.Menu>
@@ -43,10 +44,10 @@ class NavBar extends Component {
                 <Menu.Item as={Link} to="/">
                   Home
                 </Menu.Item>
-                <Menu.Item as={Link} to="/add-question">
+                <Menu.Item as={Link} to="/add">
                   New Question
                 </Menu.Item>
-                <Menu.Item as={Link} to="/leader-board">
+                <Menu.Item as={Link} to="/leader">
                   Leader Board
                 </Menu.Item>
               </Fragment>
@@ -57,9 +58,10 @@ class NavBar extends Component {
     );
   }
 }
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
   return {
-    authedUser
+    authedUser,
+    users
   };
 }
 

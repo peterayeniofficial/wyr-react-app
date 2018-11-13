@@ -14,9 +14,10 @@ class User extends Component {
   }
 }
 
-function mapStateToProps({ users }, { id }) {
+function mapStateToProps({ users, authedUser }) {
+  const user = users[authedUser];
   return {
-    user: users[id]
+    user
   };
 }
 

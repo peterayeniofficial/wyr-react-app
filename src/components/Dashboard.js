@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
 import Question from "./Question";
 import { Grid } from "semantic-ui-react";
+import { formatQuestion } from "../utils/helpers";
 
 class Dashboard extends Component {
   render() {
-    const { unansweredQuestions, answeredQuestions } = this.props;
+    const { answeredQuestions } = this.props;
 
     const panes = [
       {
@@ -17,7 +18,7 @@ class Dashboard extends Component {
             <Row>
               <Grid textAlign="center" verticalAlign="middle">
                 <Grid.Column style={{ maxWidth: 450 }}>
-                  {unansweredQuestions.map(qid => (
+                  {answeredQuestions.map(qid => (
                     <Col key={qid}>
                       <Question id={qid} />
                     </Col>
@@ -69,16 +70,16 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps({ questions, users, authedUser }) {
-  const user = users[authedUser];
-  const answeredQuestions = Object.keys(user.answers).sort(
+  const question = questions[authedUser];
+  const answeredQuestions = Object.keys(questions).sort(
     (a, b) => questions[b].timestamp - questions[a].timestamp
   );
   return {
     authedUser,
     answeredQuestions,
-    unansweredQuestions: Object.keys(questions)
-      .filter(qid => !answeredQuestions.includes(qid))
-      .sort((a, b) => questions[b].timestamp - questions[a].timestamp)
+    question: question
+      ? formatQuestion(question, users[question.author], authedUser)
+      : null
   };
 }
 

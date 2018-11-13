@@ -9,15 +9,6 @@ export function receiveUsers(users) {
   };
 }
 
-export function addUserQuestionAnswer(qid, authedUser, answer) {
-  return {
-    type: ADD_USER_QUESTION_ANSWER,
-    qid,
-    authedUser,
-    answer
-  };
-}
-
 export function addUserQuestion(qid, authedUser) {
   return {
     type: ADD_USER_QUESTION,
