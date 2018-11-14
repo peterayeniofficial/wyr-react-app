@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { addQuestion } from "../actions/questions";
+import { addNewQuestion } from "../actions/questions";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class AddQuestion extends Component {
@@ -27,7 +27,7 @@ class AddQuestion extends Component {
     const { optionOne, optionTwo } = this.state;
     const { history, dispatch } = this.props;
 
-    dispatch(addQuestion(optionOne, optionTwo));
+    dispatch(addNewQuestion(optionOne, optionTwo));
     history.push("/");
   };
 

@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import { unSetAuthUser } from "../actions/authUser";
 import { Link } from "react-router-dom";
 import { Container, Menu } from "semantic-ui-react";
-import User from "./User";
 
 class NavBar extends Component {
   logout = e => {
@@ -14,7 +13,8 @@ class NavBar extends Component {
     dispatch(unSetAuthUser());
   };
   render() {
-    const { authedUser, users } = this.props;
+    const { user, authedUser } = this.props;
+    const { name, avatarURL, id } = user;
     return (
       <div>
         <Menu fixed="top" inverted>
@@ -34,7 +34,7 @@ class NavBar extends Component {
                   Leader Board
                 </Menu.Item>
                 <Menu.Menu position="right">
-                  <Menu.Item>Welcome</Menu.Item>
+                  <Menu.Item>welcome, {name}</Menu.Item>
 
                   <Menu.Item name="Logout" onClick={this.logout} />
                 </Menu.Menu>
@@ -59,9 +59,10 @@ class NavBar extends Component {
   }
 }
 function mapStateToProps({ authedUser, users }) {
+  const user = { ...users[authedUser] };
   return {
-    authedUser,
-    users
+    user,
+    authedUser
   };
 }
 

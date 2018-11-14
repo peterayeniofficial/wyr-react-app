@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { connect } from "react-redux";
 import { Image } from "semantic-ui-react";
 
-class User extends Component {
+class User extends PureComponent {
   render() {
     const { user } = this.props;
     return (
@@ -14,11 +14,9 @@ class User extends Component {
   }
 }
 
-function mapStateToProps({ users, authedUser }) {
-  const user = users[authedUser];
+function mapStateToProps({ users }, { id }) {
   return {
-    user
+    user: users[id]
   };
 }
-
 export default connect(mapStateToProps)(User);

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { handleAddQuestionAnswer } from "../actions/shared";
+import { handleAddQuestionAnswer } from "../actions/questions";
 import { formatDate, formatQuestion } from "../utils/helpers";
-import { Grid, Icon } from "semantic-ui-react";
+//import { FaCheck } from "react-icons/fa";
+import { Grid } from "semantic-ui-react";
 import { Image } from "semantic-ui-react";
 import {
   Card,
@@ -57,7 +58,8 @@ class PollDetails extends Component {
     if (!question) {
       return <Redirect to="/404" />;
     }
-    const check = <Icon color='blue' size="small" name="check circle" />;
+    //const check = <FaCheck size="40" color="green" />;
+    const check = <span>yes</span>;
     const percentageOptionOne = (
       (optionOneVotes / (optionOneVotes + optionTwoVotes)) *
       100
