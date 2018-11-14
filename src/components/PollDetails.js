@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { handleAddQuestionAnswer } from "../actions/questions";
 import { formatDate, formatQuestion } from "../utils/helpers";
-//import { FaCheck } from "react-icons/fa";
 import { Grid } from "semantic-ui-react";
-import { Image } from "semantic-ui-react";
+import { Image, Icon } from "semantic-ui-react";
 import {
   Card,
   CardImg,
@@ -58,8 +57,7 @@ class PollDetails extends Component {
     if (!question) {
       return <Redirect to="/404" />;
     }
-    //const check = <FaCheck size="40" color="green" />;
-    const check = <span>yes</span>;
+    const check = <Icon size="small" color="teal" name="check circle" />;
     const percentageOptionOne = (
       (optionOneVotes / (optionOneVotes + optionTwoVotes)) *
       100
