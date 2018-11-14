@@ -19,7 +19,7 @@ export function addNewQuestion(question) {
     question
   };
 }
-
+// with support from mentors
 export function handleAddNewQuestion(question) {
   return (dispatch, getState) => {
     const { authedUser } = getState;
@@ -44,6 +44,7 @@ export function addQuestionAnswer(authedUser, qid, answer) {
     answer
   };
 }
+// with support from mentors
 
 export function handleAddQuestionAnswer(info) {
   return dispatch => {

@@ -7,7 +7,6 @@ import { Grid } from "semantic-ui-react";
 import { Image, Icon } from "semantic-ui-react";
 import {
   Card,
-  CardImg,
   CardText,
   CardBody,
   Row,
@@ -48,7 +47,7 @@ class PollDetails extends Component {
       optionOneText,
       optionTwoText,
       optionOneIsAnswered,
-      optionTwoIsAnswered,
+
       isAnswered,
       optionOneVotes,
       optionTwoVotes
@@ -175,6 +174,7 @@ class PollDetails extends Component {
   }
 }
 
+// from class example concept
 function mapStateToProps({ questions, users, authedUser }, props) {
   const { id } = props.match.params;
   const question = questions[id];
@@ -185,6 +185,8 @@ function mapStateToProps({ questions, users, authedUser }, props) {
       : null
   };
 }
+
+// concept from https://github.com/armujahid/reactnd-project-would-you-rather/
 
 function mapDispatchToProps(dispatch, props) {
   const { id } = props.match.params;

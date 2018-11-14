@@ -68,6 +68,8 @@ class Dashboard extends Component {
   }
 }
 
+// Use Semantic UI and Reactrap for UI
+
 function mapStateToProps({ questions, users, authedUser }) {
   const user = users[authedUser];
   const allQuestions = Object.keys(questions).sort(

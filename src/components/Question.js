@@ -50,6 +50,7 @@ const Question = props => {
   );
 };
 
+// concept from class example
 function mapStateToProps({ questions, users, authedUser }, { id }) {
   const question = questions[id];
   return {

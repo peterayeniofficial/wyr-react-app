@@ -45,6 +45,10 @@ class App extends Component {
   }
 }
 
+// switch and login from slack support
+
+// concept from the class example
+
 function mapStateToProps({ authedUser }) {
   return {
     notAuthenticated: authedUser === null
