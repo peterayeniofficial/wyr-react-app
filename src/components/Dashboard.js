@@ -7,7 +7,7 @@ import { Grid } from "semantic-ui-react";
 
 class Dashboard extends Component {
   render() {
-    const { allQuestions } = this.props;
+    const { answeredQuestions, unansweredQuestions } = this.props;
 
     const panes = [
       {
@@ -17,7 +17,7 @@ class Dashboard extends Component {
             <Row>
               <Grid textAlign="center" verticalAlign="middle">
                 <Grid.Column style={{ maxWidth: 450 }}>
-                  {allQuestions.map(qid => (
+                  {unansweredQuestions.map(qid => (
                     <Col key={qid}>
                       <Question id={qid} />
                     </Col>
@@ -35,7 +35,7 @@ class Dashboard extends Component {
             <Row>
               <Grid textAlign="center" verticalAlign="middle">
                 <Grid.Column style={{ maxWidth: 450 }}>
-                  {allQuestions.map(qid => (
+                  {answeredQuestions.map(qid => (
                     <Col key={qid}>
                       <Question id={qid} />
                       <br />
@@ -69,15 +69,20 @@ class Dashboard extends Component {
 }
 
 // Use Semantic UI and Reactrap for UI
+// get the insight to the sorting method from slack forum
 
 function mapStateToProps({ questions, users, authedUser }) {
   const user = users[authedUser];
-  const allQuestions = Object.keys(questions).sort(
+  const answeredQuestions = Object.keys(user.answers).sort(
     (a, b) => questions[b].timestamp - questions[a].timestamp
   );
+  const unansweredQuestions = Object.keys(questions)
+    .filter(id => !answeredQuestions.includes(id))
+    .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
   return {
     authedUser,
-    allQuestions
+    answeredQuestions,
+    unansweredQuestions
   };
 }
 
