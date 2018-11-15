@@ -15,7 +15,9 @@ class SignIn extends Component {
     });
   };
 
-  onUserLogin = authId => {
+  // get this to work with insight from the reviewer
+  onUserLogin = () => {
+    const { authId } = this.state;
     if (authId) {
       this.props.dispatch(setAuthUser(authId));
     }
@@ -76,9 +78,10 @@ class SignIn extends Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
   return {
-    users
+    users,
+    authedUser
   };
 }
 

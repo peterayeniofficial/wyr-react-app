@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { handleAddQuestionAnswer } from "../actions/questions";
-import { formatDate, formatQuestion } from "../utils/helpers";
+import { formatDate } from "../utils/helpers";
 import { Grid } from "semantic-ui-react";
 import { Image, Icon } from "semantic-ui-react";
 import {
@@ -34,28 +34,30 @@ class PollDetails extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.saveQuestionAnswer(this.state.selectedOption);
+    const { selectedOption } = this.state;
+    const { dispatch, id, authedUser } = this.props;
+    dispatch(
+      handleAddQuestionAnswer({
+        authedUser,
+        qid: id,
+        answer: selectedOption
+      })
+    );
   };
   render() {
-    const { question } = this.props;
+    const { question, authedUser, users } = this.props;
     const { selectedOption } = this.state;
-    const {
-      id,
-      name,
-      avatar,
-      timestamp,
-      optionOneText,
-      optionTwoText,
-      optionOneIsAnswered,
-
-      isAnswered,
-      optionOneVotes,
-      optionTwoVotes
-    } = question;
+    const { id, name, avatar, timestamp, optionOne, optionTwo } = question;
 
     if (!question) {
       return <Redirect to="/404" />;
     }
+    const optionOneIsAnswered = question.optionOne.votes.includes(authedUser);
+    const optionOneVotes = question.optionOne.votes.length;
+    const optionTwoVotes = question.optionTwo.votes.length;
+    const isAnswered =
+      optionOne.votes.includes(authedUser) ||
+      optionTwo.votes.includes(authedUser);
     const check = <Icon size="small" color="teal" name="check circle" />;
     const percentageOptionOne = (
       (optionOneVotes / (optionOneVotes + optionTwoVotes)) *
@@ -81,7 +83,7 @@ class PollDetails extends Component {
           <Grid.Column style={{ maxWidth: 450 }}>
             <Card>
               <CardHeader>
-                <CardText>Asked by: {name}</CardText>
+                <CardText>Asked by: {users[question.author].name}</CardText>
                 <div>{formatDate(timestamp)}</div>
               </CardHeader>
               <CardBody>
@@ -89,8 +91,12 @@ class PollDetails extends Component {
                   <Col>
                     <Card>
                       <CardBody>
-                        <Image avatar size="mini" src={avatar} />
-                        <CardText>{name}</CardText>
+                        <Image
+                          avatar
+                          size="mini"
+                          src={users[question.author].avatarURL}
+                        />
+                        <CardText>{users[question.author].name}</CardText>
                       </CardBody>
                     </Card>
                   </Col>
@@ -103,7 +109,7 @@ class PollDetails extends Component {
                               <CardTitle>Results</CardTitle>
                               <CardText>
                                 {" "}
-                                {optionOneText}{" "}
+                                {optionOne.text}{" "}
                                 {optionOneIsAnswered ? check : null}
                               </CardText>
                               <Progress value={percentageOptionOne}>
@@ -117,7 +123,7 @@ class PollDetails extends Component {
                           <Card>
                             <CardBody>
                               <CardText>
-                                {optionTwoText}{" "}
+                                {optionTwo.text}{" "}
                                 {!optionOneIsAnswered ? check : null}
                               </CardText>
                               <Progress value={percentageOptionTwo}>
@@ -141,7 +147,7 @@ class PollDetails extends Component {
                                     value="optionOne"
                                     onChange={this.questionSelection}
                                   />{" "}
-                                  {optionOneText}
+                                  {optionOne.text}
                                 </Label>
                               </FormGroup>
                               <FormGroup check>
@@ -152,7 +158,7 @@ class PollDetails extends Component {
                                     value="optionTwo"
                                     onChange={this.questionSelection}
                                   />{" "}
-                                  {optionTwoText}
+                                  {optionTwo.text}
                                 </Label>
                               </FormGroup>
                             </FormGroup>
@@ -177,27 +183,13 @@ class PollDetails extends Component {
 // from class example concept
 function mapStateToProps({ questions, users, authedUser }, props) {
   const { id } = props.match.params;
-  const question = questions[id];
+  const question = { ...questions[id] };
   return {
+    id,
     authedUser,
-    question: question
-      ? formatQuestion(question, users[question.author], authedUser)
-      : null
+    question,
+    users
   };
 }
 
-// concept from https://github.com/armujahid/reactnd-project-would-you-rather/
-
-function mapDispatchToProps(dispatch, props) {
-  const { id } = props.match.params;
-  return {
-    saveQuestionAnswer: answer => {
-      dispatch(handleAddQuestionAnswer(id, answer));
-    }
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PollDetails);
+export default connect(mapStateToProps)(PollDetails);

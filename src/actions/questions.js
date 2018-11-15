@@ -27,7 +27,7 @@ export function handleAddNewQuestion(question) {
 
     return saveNewQuestion({
       optionOneText: question.optionOne,
-      optionTwoText: question.optionTwoText,
+      optionTwoText: question.optionTwo,
       author: authedUser
     })
       .then(question => dispatch(addNewQuestion(question)))
@@ -51,7 +51,7 @@ export function handleAddQuestionAnswer(info) {
     dispatch(addQuestionAnswer(info));
 
     return saveNewQuestionAnswer(info).catch(e => {
-      console.warn("Error in handleToggleTweet", e);
+      console.warn("Error in handleAddQuestionAnswer", e);
       dispatch(addQuestionAnswer(info));
       alert("Error saving answer");
     });

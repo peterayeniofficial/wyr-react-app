@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { unSetAuthUser } from "../actions/authUser";
 import { Link } from "react-router-dom";
-import { Container, Menu } from "semantic-ui-react";
+import { Container, Menu, Image } from "semantic-ui-react";
 
 class NavBar extends Component {
   logout = e => {
@@ -34,7 +34,11 @@ class NavBar extends Component {
                   Leader Board
                 </Menu.Item>
                 <Menu.Menu position="right">
-                  <Menu.Item>welcome, {name}</Menu.Item>
+                  <Menu.Item>
+                    welcome:
+                    <Image avatar size="mini" src={avatarURL} />
+                    {name}
+                  </Menu.Item>
 
                   <Menu.Item name="Logout" onClick={this.logout} />
                 </Menu.Menu>
@@ -50,6 +54,11 @@ class NavBar extends Component {
                 <Menu.Item as={Link} to="/leader">
                   Leader Board
                 </Menu.Item>
+                <Menu.Menu position="right">
+                  <Menu.Item as={Link} to="/">
+                    Sign In
+                  </Menu.Item>
+                </Menu.Menu>
               </Fragment>
             )}
           </Container>

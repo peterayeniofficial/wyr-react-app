@@ -6,7 +6,7 @@ export function formatDate(timestamp) {
 
 // concept from class example
 
-export function formatQuestion(question, author, authedUser) {
+/* export function formatQuestion(question, author, authedUser) {
   const { id, timestamp, optionOne, optionTwo } = question;
   const { name, avatarURL } = author;
 
@@ -25,4 +25,4 @@ export function formatQuestion(question, author, authedUser) {
     optionOneVotes: optionOne.votes.length,
     optionTwoVotes: optionTwo.votes.length
   };
-}
+} */
