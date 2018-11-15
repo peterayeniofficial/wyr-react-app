@@ -1,10 +1,12 @@
-#Would You Rather APP
+# Would You Rather APP
+
 The would you Rather App is a project as part of the Udacity React Nano Degree.
 The app allow users to create polls that present two options that users can vote on the
 option thy prefer. A sample question would be something like: Would you rather
 go fishing or swimming.
 
-##Features
+## Features
+
 Voting: This allow users to vote on polls created by other users
 Create Polls: User can also create votes
 Leader Board: There is an aggregation of users votes and polls created that is rank to show the leading users in the app
