@@ -13,6 +13,8 @@ import SignIn from "./SignIn";
 import NotFound from "./NotFound";
 import PollDetails from "./PollDetails";
 
+// with insight from the class room
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());

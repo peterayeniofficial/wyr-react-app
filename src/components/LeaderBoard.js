@@ -36,10 +36,10 @@ class LeaderBoard extends Component {
                             {index + 1}
                           </Badge>
                           <Button color="primary" outline block>
-                             <Badge color="primary">{user.answered}</Badge>
+                            <Badge color="primary">{user.answered}</Badge>
                           </Button>
                           <Button color="primary" outline block>
-                             <Badge color="secondary">{user.created}</Badge>
+                            <Badge color="secondary">{user.created}</Badge>
                           </Button>
                         </CardBody>
                       </Card>
@@ -54,6 +54,7 @@ class LeaderBoard extends Component {
     );
   }
 }
+// with insight from the class room
 
 function mapStateToProps({ users }) {
   const topUser = Object.keys(users)

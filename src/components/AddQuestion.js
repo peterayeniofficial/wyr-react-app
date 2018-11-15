@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { addNewQuestion } from "../actions/questions";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
+// with insight from the class room
+
 class AddQuestion extends Component {
   state = {
     optionOne: "",
@@ -21,7 +23,7 @@ class AddQuestion extends Component {
       optionTwo: e.target.value
     });
   };
-
+  // with insight from the class room
   handleSubmit = e => {
     e.preventDefault();
     const { optionOne, optionTwo } = this.state;

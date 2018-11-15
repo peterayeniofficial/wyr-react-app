@@ -20,6 +20,7 @@ class Dashboard extends Component {
                   {unansweredQuestions.map(qid => (
                     <Col key={qid}>
                       <Question id={qid} />
+                      <br />
                     </Col>
                   ))}
                 </Grid.Column>

@@ -17,7 +17,7 @@ const Question = props => {
     props.history.push(`/questions/${id}`);
   };
   const { question, users } = props;
-  const { id, timestamp, optionOne, optionTwo } = question;
+  const { optionOne, optionTwo } = question;
   return (
     <Card>
       <CardHeader>
