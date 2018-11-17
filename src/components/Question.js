@@ -20,7 +20,10 @@ const Question = props => {
   return (
     <Card>
       <CardBody>
-        <CardHeader>{users[question.author].name} Asks?</CardHeader>
+        <CardHeader>
+          <Image avatar size="mini" src={users[question.author].avatarURL} />
+          {users[question.author].name} Asks?
+        </CardHeader>
         <CardTitle>Would You Rather</CardTitle>
         <CardText>
           {question.optionOne.text} or {question.optionTwo.text}
