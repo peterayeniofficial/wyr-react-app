@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { addNewQuestion } from "../actions/questions";
+import { handleAddQuestion } from "../actions/shared";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { Redirect } from "react-router-dom";
 
@@ -30,9 +30,8 @@ class AddQuestion extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { optionOne, optionTwo } = this.state;
-    const { history, addQuestion } = this.props;
-
-    addQuestion(optionOne, optionTwo);
+    const { history, dispatch, authedUser } = this.props;
+    dispatch(handleAddQuestion(authedUser, optionOne, optionTwo));
     history.push("/");
   };
 
@@ -101,14 +100,5 @@ function mapStateToProps({ authedUser }) {
     authedUser
   };
 }
-function mapDispatchToProps(dispatch) {
-  return {
-    addQuestion: (optionOne, optionTwo) => {
-      dispatch(addNewQuestion(optionOne, optionTwo));
-    }
-  };
-}
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddQuestion);
+
+export default connect(mapStateToProps)(AddQuestion);

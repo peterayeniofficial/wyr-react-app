@@ -39,7 +39,7 @@ class PollDetails extends Component {
   render() {
     const { question, authedUser, users } = this.props;
     const { selectedOption } = this.state;
-    const { id, name, avatar, timestamp, optionOne, optionTwo } = question;
+    const { timestamp, optionOne, optionTwo } = question;
 
     if (!question) {
       return <Redirect to="/404" />;

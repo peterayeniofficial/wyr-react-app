@@ -12,9 +12,22 @@ export default function questions(state = {}, action) {
         ...action.questions
       };
     case ADD_NEW_QUESTION:
+      const { author, optionOneText, optionTwoText, id } = action;
       return {
         ...state,
-        [action.question.id]: action.question
+        [id]: {
+          id,
+          author,
+          timestamp: Date.now(),
+          optionOne: {
+            votes: [],
+            text: optionOneText
+          },
+          optionTwo: {
+            votes: [],
+            text: optionTwoText
+          }
+        }
       };
     case ADD_QUESTION_ANSWER:
       const question = { ...state[action.qid] };

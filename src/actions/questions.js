@@ -1,7 +1,5 @@
-import { _saveQuestion } from "../utils/_DATA";
 import { saveNewQuestionAnswer } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading";
-import { addNewUserQuestion } from "./users";
 
 export const GET_QUESTIONS = "GET_QUESTIONS";
 export const ADD_NEW_QUESTION = "ADD_NEW_QUESTION";
@@ -15,14 +13,19 @@ export function getQuestions(questions) {
   };
 }
 
-export function addNewQuestion(question) {
+// action creators for saving new question
+
+export function addNewQuestion(author, optionOneText, optionTwoText, id) {
   return {
     type: ADD_NEW_QUESTION,
-    question
+    author,
+    optionOneText,
+    optionTwoText,
+    id
   };
 }
 // with support from mentors
-export function handleAddNewQuestion(optionOneText, optionTwoText) {
+/* export function handleAddNewQuestion(optionOneText, optionTwoText) {
   return (dispatch, getState) => {
     const { authedUser } = getState;
     dispatch(showLoading());
@@ -32,13 +35,11 @@ export function handleAddNewQuestion(optionOneText, optionTwoText) {
       optionTwoText,
       author: authedUser
     })
-      .then(formatedQuestion => {
-        dispatch(addNewQuestion(formatedQuestion));
-        dispatch(addNewUserQuestion(authedUser, formatedQuestion.id));
-      })
+      .then(question => dispatch(addNewQuestion(question)))
       .then(() => dispatch(hideLoading()));
   };
 }
+ */
 
 // action creators for saving Answer
 export function addQuestionAnswer(authedUser, qid, answer) {
