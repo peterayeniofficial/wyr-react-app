@@ -7,13 +7,13 @@ go fishing or swimming.
 
 ## Features
 
-### Voting: This allow users to vote on polls created by other users
+#### Voting: This allow users to vote on polls created by other users
 
-### Create Polls: User can also create votes
+#### Create Polls: User can also create votes
 
-### Leader Board: There is an aggregation of users votes and polls created that is rank to show the leading users in the app
+#### Leader Board: There is an aggregation of users votes and polls created that is rank to show the leading users in the app
 
-### Authentication: There is a simple authentication flow
+#### Authentication: There is a simple authentication flow
 
 ## Installation Instructions
 
