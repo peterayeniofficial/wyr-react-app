@@ -16,18 +16,14 @@ const Question = props => {
     e.preventDefault();
     props.history.push(`/questions/${id}`);
   };
-  const { question, users } = props;
-  const { optionOne, optionTwo } = question;
+  const { question } = props;
   return (
     <Card>
-      <CardHeader>
-        <Image avatar size="mini" src={users[question.author].avatarURL} />
-        {users[question.author].name} Asks:
-      </CardHeader>
       <CardBody>
         <CardTitle>Would You Rather</CardTitle>
         <CardText>
-          {optionOne.text} or {optionTwo.text}
+          console.log(question.optionOne.text)
+          {question.optionOne.text} or {question.optionTwo.text}
         </CardText>
         <Button
           outline
@@ -43,12 +39,10 @@ const Question = props => {
 };
 
 // concept from class example
-function mapStateToProps({ questions, users, authedUser }, { id }) {
+function mapStateToProps({ questions }, { id }) {
   const question = questions[id];
   return {
-    authedUser,
-    question,
-    users
+    question
   };
 }
 

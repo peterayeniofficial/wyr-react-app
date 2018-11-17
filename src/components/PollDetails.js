@@ -34,15 +34,7 @@ class PollDetails extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { selectedOption } = this.state;
-    const { dispatch, id, authedUser } = this.props;
-    dispatch(
-      handleAddQuestionAnswer({
-        authedUser,
-        qid: id,
-        answer: selectedOption
-      })
-    );
+    this.props.saveQuestionAnswer(this.state.selectedOption);
   };
   render() {
     const { question, authedUser, users } = this.props;
@@ -183,7 +175,7 @@ class PollDetails extends Component {
 // from class example concept
 function mapStateToProps({ questions, users, authedUser }, props) {
   const { id } = props.match.params;
-  const question = { ...questions[id] };
+  const question = questions[id];
   return {
     id,
     authedUser,
@@ -192,4 +184,16 @@ function mapStateToProps({ questions, users, authedUser }, props) {
   };
 }
 
-export default connect(mapStateToProps)(PollDetails);
+function mapDispatchToProps(dispatch, props) {
+  const { id } = props.match.params;
+  return {
+    saveQuestionAnswer: answer => {
+      dispatch(handleAddQuestionAnswer(id, answer));
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PollDetails);

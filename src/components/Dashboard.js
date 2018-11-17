@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
 import Question from "./Question";
 import { Grid } from "semantic-ui-react";
+import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
-    const { answeredQuestions, unansweredQuestions } = this.props;
+    const { answeredQuestions, unansweredQuestions, authedUser } = this.props;
 
     const panes = [
       {
@@ -49,6 +50,12 @@ class Dashboard extends Component {
         )
       }
     ];
+
+    if (authedUser === null) {
+      return (
+        <Redirect to={{ pathname: "/sign-in", state: { redirectUrl: "/" } }} />
+      );
+    }
 
     return (
       <div>

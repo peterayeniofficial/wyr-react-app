@@ -2,10 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardBody, Row, Col, Badge, Button, CardText } from "reactstrap";
 import { Image, Grid } from "semantic-ui-react";
+import { Redirect } from "react-router-dom";
 
 class LeaderBoard extends Component {
   render() {
-    const { topUser } = this.props;
+    const { topUser, authedUser } = this.props;
+    if (authedUser === null) {
+      return (
+        <Redirect
+          to={{ pathname: "/sign-in", state: { redirectUrl: "/leader" } }}
+        />
+      );
+    }
     return (
       <div>
         <style>{`
@@ -56,7 +64,7 @@ class LeaderBoard extends Component {
 }
 // with insight from the class room
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
   const topUser = Object.keys(users)
     .map(id => ({
       id,
@@ -67,7 +75,8 @@ function mapStateToProps({ users }) {
     }))
     .sort((a, b) => b.created + b.created - (a.created + a.created));
   return {
-    topUser
+    topUser,
+    authedUser
   };
 }
 

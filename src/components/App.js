@@ -29,13 +29,13 @@ class App extends Component {
           <Container>
             <Switch>
               {notAuthenticated ? (
-                <Route path="/" exact component={SignIn} />
+                <Route path="/sign-in" component={SignIn} />
               ) : (
                 <Fragment>
                   <Route path="/" exact component={Dashboard} />
-                  <Route path="/add" exact component={AddQuestion} />
+                  <Route path="/add" component={AddQuestion} />
                   <Route path="/questions/:id" component={PollDetails} />
-                  <Route path="/leader" exact component={LeaderBoard} />
+                  <Route path="/leader" component={LeaderBoard} />
                 </Fragment>
               )}
               <Route component={NotFound} />

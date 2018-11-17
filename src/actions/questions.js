@@ -1,5 +1,7 @@
-import { saveNewQuestionAnswer, saveNewQuestion } from "../utils/api";
+import { _saveQuestion } from "../utils/_DATA";
+import { saveNewQuestionAnswer } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading";
+import { addNewUserQuestion } from "./users";
 
 export const GET_QUESTIONS = "GET_QUESTIONS";
 export const ADD_NEW_QUESTION = "ADD_NEW_QUESTION";
@@ -20,17 +22,20 @@ export function addNewQuestion(question) {
   };
 }
 // with support from mentors
-export function handleAddNewQuestion(question) {
+export function handleAddNewQuestion(optionOneText, optionTwoText) {
   return (dispatch, getState) => {
     const { authedUser } = getState;
     dispatch(showLoading());
 
-    return saveNewQuestion({
-      optionOneText: question.optionOne,
-      optionTwoText: question.optionTwo,
+    return _saveQuestion({
+      optionOneText,
+      optionTwoText,
       author: authedUser
     })
-      .then(question => dispatch(addNewQuestion(question)))
+      .then(formatedPoll => {
+        dispatch(addNewQuestion(formatedPoll));
+        dispatch(addNewUserQuestion(authedUser, formatedPoll.id));
+      })
       .then(() => dispatch(hideLoading()));
   };
 }
@@ -46,14 +51,18 @@ export function addQuestionAnswer(authedUser, qid, answer) {
 }
 // with support from mentors
 
-export function handleAddQuestionAnswer(info) {
-  return dispatch => {
-    dispatch(addQuestionAnswer(info));
-
-    return saveNewQuestionAnswer(info).catch(e => {
-      console.warn("Error in handleAddQuestionAnswer", e);
-      dispatch(addQuestionAnswer(info));
-      alert("Error saving answer");
-    });
+export function handleAddQuestionAnswer(qid, answer) {
+  return (dispatch, getState) => {
+    const { authedUser } = getState();
+    dispatch(showLoading());
+    return saveNewQuestionAnswer({
+      authedUser,
+      qid,
+      answer
+    })
+      .then(() => {
+        dispatch(addQuestionAnswer(authedUser, qid, answer));
+      })
+      .then(() => dispatch(hideLoading()));
   };
 }

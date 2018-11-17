@@ -3,6 +3,7 @@ import { Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { addNewQuestion } from "../actions/questions";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Redirect } from "react-router-dom";
 
 // with insight from the class room
 
@@ -13,12 +14,14 @@ class AddQuestion extends Component {
   };
 
   handleOptionOneChange = e => {
+    e.preventDefault();
     this.setState({
       optionOne: e.target.value
     });
   };
 
   handleOptionTwoChange = e => {
+    e.preventDefault();
     this.setState({
       optionTwo: e.target.value
     });
@@ -27,14 +30,22 @@ class AddQuestion extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { optionOne, optionTwo } = this.state;
-    const { history, dispatch } = this.props;
+    const { history, addQuestion } = this.props;
 
-    dispatch(addNewQuestion(optionOne, optionTwo));
+    addQuestion(optionOne, optionTwo);
     history.push("/");
   };
 
   render() {
     const { optionOne, optionTwo } = this.state;
+    const { authedUser } = this.props;
+    if (authedUser === null) {
+      return (
+        <Redirect
+          to={{ pathname: "/sign-in", state: { redirectUrl: "/add" } }}
+        />
+      );
+    }
     return (
       <div className="login-form">
         <style>{`
@@ -85,4 +96,19 @@ class AddQuestion extends Component {
   }
 }
 
-export default connect()(AddQuestion);
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    addQuestion: (optionOne, optionTwo) => {
+      dispatch(addNewQuestion(optionOne, optionTwo));
+    }
+  };
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddQuestion);
