@@ -3,10 +3,12 @@ import { setAuthUser } from "../actions/authUser";
 import { connect } from "react-redux";
 import { Grid, Header } from "semantic-ui-react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Redirect } from "react-router-dom";
 
 class SignIn extends Component {
   state = {
-    authId: ""
+    authId: "",
+    toDashboard: false
   };
 
   onChange = authId => {
@@ -20,12 +22,24 @@ class SignIn extends Component {
     const { authId } = this.state;
     if (authId) {
       this.props.dispatch(setAuthUser(authId));
+      this.setState({ toDashboard: true });
     }
   };
 
   render() {
     const { authId } = this.state;
     const { users } = this.props;
+
+    if (this.state.toDashboard === true) {
+      if (this.props.location.state === undefined) {
+        return <Redirect to={"/"} />;
+      } else if (this.props.location.state.redirectUrl[0] === "q") {
+        return <Redirect to={this.props.location.state.redirectUrl} />;
+      } else {
+        return <Redirect to={this.props.location.state.redirectUrl} />;
+      }
+    }
+
     return (
       <div className="login-form">
         <style>{`
