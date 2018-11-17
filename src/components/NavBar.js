@@ -14,7 +14,7 @@ class NavBar extends Component {
   };
   render() {
     const { user, authedUser } = this.props;
-    const { name, avatarURL, id } = user;
+    const { name, avatarURL } = user;
     return (
       <div>
         <Menu fixed="top" inverted>
@@ -55,7 +55,7 @@ class NavBar extends Component {
                   Leader Board
                 </Menu.Item>
                 <Menu.Menu position="right">
-                  <Menu.Item as={Link} to="/">
+                  <Menu.Item as={Link} to="/sign-in">
                     Sign In
                   </Menu.Item>
                 </Menu.Menu>

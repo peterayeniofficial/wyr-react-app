@@ -22,7 +22,6 @@ const Question = props => {
       <CardBody>
         <CardTitle>Would You Rather</CardTitle>
         <CardText>
-          console.log(question.optionOne.text)
           {question.optionOne.text} or {question.optionTwo.text}
         </CardText>
         <Button
