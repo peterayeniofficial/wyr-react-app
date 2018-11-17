@@ -15,6 +15,12 @@ go fishing or swimming.
 
 ### Authentication: There is a simple authentication flow
 
+## Installation Instructions
+
+Clone the the repository and then run
+
+### `npm install`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
