@@ -32,9 +32,9 @@ export function handleAddNewQuestion(optionOneText, optionTwoText) {
       optionTwoText,
       author: authedUser
     })
-      .then(formatedPoll => {
-        dispatch(addNewQuestion(formatedPoll));
-        dispatch(addNewUserQuestion(authedUser, formatedPoll.id));
+      .then(formatedQuestion => {
+        dispatch(addNewQuestion(formatedQuestion));
+        dispatch(addNewUserQuestion(authedUser, formatedQuestion.id));
       })
       .then(() => dispatch(hideLoading()));
   };

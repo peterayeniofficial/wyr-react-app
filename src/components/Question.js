@@ -16,10 +16,11 @@ const Question = props => {
     e.preventDefault();
     props.history.push(`/questions/${id}`);
   };
-  const { question } = props;
+  const { question, users } = props;
   return (
     <Card>
       <CardBody>
+        <CardHeader>{users[question.author].name} Asks?</CardHeader>
         <CardTitle>Would You Rather</CardTitle>
         <CardText>
           {question.optionOne.text} or {question.optionTwo.text}
@@ -38,10 +39,11 @@ const Question = props => {
 };
 
 // concept from class example
-function mapStateToProps({ questions }, { id }) {
+function mapStateToProps({ questions, users }, { id }) {
   const question = questions[id];
   return {
-    question
+    question,
+    users
   };
 }
 
