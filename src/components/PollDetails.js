@@ -41,9 +41,10 @@ class PollDetails extends Component {
     const { selectedOption } = this.state;
     const { timestamp, optionOne, optionTwo } = question;
 
-    if (!question) {
+    if (!question && this.props.redirect) {
       return <Redirect to="/404" />;
     }
+
     const optionOneIsAnswered = question.optionOne.votes.includes(authedUser);
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
@@ -175,12 +176,19 @@ class PollDetails extends Component {
 // from class example concept
 function mapStateToProps({ questions, users, authedUser }, props) {
   const { id } = props.match.params;
-  const question = questions[id];
+  const question = questions[id] || null;
+  // implementing redirect if invalid id is provided that is not
+  //included in the database
+  const arrQuestion = Object.values(questions).map(a => a.id);
+  const noRedirect = arrQuestion.includes(id);
+  const redirect = !noRedirect;
+
   return {
-    id,
     authedUser,
     question,
-    users
+    users,
+    noRedirect,
+    redirect
   };
 }
 

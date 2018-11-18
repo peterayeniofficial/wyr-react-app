@@ -38,7 +38,7 @@ class App extends Component {
                   <Route path="/leaderboard" component={LeaderBoard} />
                 </Fragment>
               )}
-              <Route component={NotFound} />
+              <Route component={NotFound} path="/404" />
             </Switch>
           </Container>
         </Fragment>
