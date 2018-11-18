@@ -30,7 +30,7 @@ class NavBar extends Component {
                 <Menu.Item as={Link} to="/add">
                   New Question
                 </Menu.Item>
-                <Menu.Item as={Link} to="/leader">
+                <Menu.Item as={Link} to="/leaderboard">
                   Leader Board
                 </Menu.Item>
                 <Menu.Menu position="right">
@@ -51,7 +51,7 @@ class NavBar extends Component {
                 <Menu.Item as={Link} to="/add">
                   New Question
                 </Menu.Item>
-                <Menu.Item as={Link} to="/leader">
+                <Menu.Item as={Link} to="/leaderboard">
                   Leader Board
                 </Menu.Item>
                 <Menu.Menu position="right">
