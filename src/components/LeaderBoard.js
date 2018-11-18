@@ -73,7 +73,7 @@ function mapStateToProps({ users, authedUser }) {
       name: users[id].name,
       imgUrl: users[id].avatarURL
     }))
-    .sort((a, b) => b.created + b.created - (a.created + a.created));
+    .sort((a, b) => b.created + b.answered - (a.created + a.answered));
   return {
     topUser,
     authedUser
