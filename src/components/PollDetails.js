@@ -37,13 +37,15 @@ class PollDetails extends Component {
     this.props.saveQuestionAnswer(this.state.selectedOption);
   };
   render() {
+   
     const { question, authedUser, users } = this.props;
-    const { selectedOption } = this.state;
-    const { timestamp, optionOne, optionTwo } = question;
-
     if (!question && this.props.redirect) {
       return <Redirect to="/404" />;
     }
+    const { selectedOption } = this.state;
+    const { timestamp, optionOne, optionTwo } = question;
+
+   
 
     const optionOneIsAnswered = question.optionOne.votes.includes(authedUser);
     const optionOneVotes = question.optionOne.votes.length;
